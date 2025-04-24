@@ -1,7 +1,13 @@
 import Layout from '@/components/layout/layout'
 import Card from '@/components/card'
+import useSWR from 'swr'
+import { fetcher } from '@/utils'
+import DisplayEntities from '@/components/display-entities'
 
 export default function Home() {
+
+    
+   
     return (
         <Layout home>
             <div className="px-4">
@@ -10,7 +16,8 @@ export default function Home() {
                     Live like the stars in these luxurious Southern California
                     estates.
                 </p>
-            </div>
+            </div> 
+            
             <div className="mt-6 px-4 sm:overflow-x-auto ">
                 <div className="sm:flex  sm:-mx-2 sm:pb-8  sm:-mx-2 ">
                     {[1, 2, 3, 4, 5, 6].map((item) => (
@@ -19,6 +26,7 @@ export default function Home() {
                             key={item}
                         >
                             <Card />
+
                         </div>
                     ))}
                 </div>

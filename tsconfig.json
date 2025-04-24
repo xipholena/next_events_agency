@@ -27,8 +27,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "server/models/event.js",
-    "server/models/eventtag.js"
+    "server/models/event.ts",
+    "server/models/eventtag.ts",
+    "db/seeders/20250418143004-Events.js"
   ],
   "exclude": [
     "node_modules"

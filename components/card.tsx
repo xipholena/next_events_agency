@@ -13,6 +13,7 @@ const Card = () => {
                     src="https://images.unsplash.com/photo-1656139789481-433ed92df29a?q=80&w=3400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="house photo"
                     fill={true}
+                    priority={false}
                 />
             </div>
             <div className="relative px-4 -top-16">

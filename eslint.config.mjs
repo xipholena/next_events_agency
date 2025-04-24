@@ -12,12 +12,13 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.config({
     extends: [
-      "next/core-web-vitals", 
+      "next/core-web-vitals",
       "next/typescript",
-      "prettier"
+      //"prettier"
     ],
     rules: {
-      '@typescript-eslint/no-unused-vars': "off"
+      '@typescript-eslint/no-unused-vars': "off",
+      "prettier/prettier": "warn"
     },
   }),
 ]

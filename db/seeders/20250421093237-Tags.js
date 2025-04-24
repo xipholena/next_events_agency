@@ -1,63 +1,35 @@
 'use strict';
 
+const { randomIntFromInterval } = require("@/utils");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('tags', [
-      {
-          "id": 1,
-          "type": "genre",
-          "tag_name": "Indie/Alternative"
-      },
-      {
-          "id": 2,
-          "type": "genre",
-          "tag_name": "Pop"
-      },
-      {
-          "id": 3,
-          "type": "genre",
-          "tag_name": "Rock"
-      },
-      {
-          "id": 4,
-          "type": "genre",
-          "tag_name": "Jazz"
-      },
-      {
-          "id": 5,
-          "type": "genre",
-          "tag_name": "Classical"
-      },
-      {
-          "id": 6,
-          "type": "genre",
-          "tag_name": "Hip-Hop/Rap"
-      },
-      {
-          "id": 7,
-          "type": "genre",
-          "tag_name": "Electronic/Dance"
-      },
-      {
-          "id": 8,
-          "type": "genre",
-          "tag_name": "Country"
-      },
-      {
-          "id": 9,
-          "type": "genre",
-          "tag_name": "R&B/Soul"
-      },
-      {
-          "id": 10,
-          "type": "genre",
-          "tag_name": "Reggae"
-      }
-    ], {});
-  },
+    async up(queryInterface, Sequelize) {
+        const tagTypes = ["genre"]
+        const genres = [
+            "Indie/Alternative",
+            "Pop",
+            "Rock",
+            "Jazz",
+            "Classical",
+            "Hip-Hop/Rap",
+            "Electronic/Dance",
+            "Country",
+            "R&B/Soul",
+            "Reggae"
+        ]
+        const tags = [...Array(2500).keys()].map((tag_index) => ({
+            id: tag_index + 1,
+            type: tagTypes[0],
+            tag_name: genres[randomIntFromInterval(0, genres.length - 1)],
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('tags', null, {})
-  }
+            created_at: new Date(),
+            updated_at: new Date()
+        }))
+        await queryInterface.bulkInsert('tags', tags, {});
+    },
+
+    async down(queryInterface, Sequelize) {
+        await queryInterface.bulkDelete('tags', null, {})
+    }
 };
