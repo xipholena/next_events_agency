@@ -1,12 +1,16 @@
 'use strict';
 
-const { generateTrimmedText, randomIntFromInterval } = require("@/utils");
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
         const { faker } = require("@faker-js/faker");
+        function randomIntFromInterval(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
 
+        const generateTrimmedText = (text, maxSymbols) => {
+            return text.length > maxSymbols ? text?.slice(maxSymbols) : text
+        }
         const statuses = ['draft', 'open', 'sold_out', 'finished']
 
         const events = [...Array(2500).keys()].map((event_index) => ({

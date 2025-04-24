@@ -1,10 +1,13 @@
 'use strict';
 
-const { randomIntFromInterval } = require("@/utils");
+
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
+        function randomIntFromInterval(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
         const events_tags = [...Array(2500).keys()].map((event_tag_index) => ({
             id: event_tag_index + 1,
             event_id: randomIntFromInterval(0, 2500),

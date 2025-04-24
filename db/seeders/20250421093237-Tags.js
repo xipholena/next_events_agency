@@ -1,10 +1,11 @@
 'use strict';
 
-const { randomIntFromInterval } = require("@/utils");
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
+        function randomIntFromInterval(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
         const tagTypes = ["genre"]
         const genres = [
             "Indie/Alternative",

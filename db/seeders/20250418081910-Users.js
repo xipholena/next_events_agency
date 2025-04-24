@@ -1,14 +1,17 @@
 'use strict';
 
-const { randomIntFromInterval } = require("@/utils");
+
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
         const { faker } = require("@faker-js/faker");
+        function randomIntFromInterval(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
 
         const roles = ['user', 'moderator', 'operator']
-        const users = [...Array(2500).keys()].map((user_index) => ({
+        const users = [...Array(1000).keys()].map((user_index) => ({
             id: user_index + 1,
             photo_url: faker.image.url({ width: 480, height: 640 }),
             user_email: faker.internet.email(),

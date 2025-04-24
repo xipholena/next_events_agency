@@ -1,10 +1,13 @@
 'use strict';
 
-const { randomIntFromInterval } = require("@/utils");
+
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
+        function randomIntFromInterval(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
         const statuses = ['free', 'reserved', 'sold', 'used', 'refund']
         const tickets = [...Array(2500).keys()].map((ticket_index) => ({
             id: ticket_index + 1,
