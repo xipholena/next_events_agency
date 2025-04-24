@@ -14,7 +14,7 @@ module.exports = {
             banner_url: faker.image.url({ width: 480, height: 640 }),
             event_name: generateTrimmedText(faker.lorem.sentence(), 45),
             description: generateTrimmedText(faker.lorem.paragraph({ min: 1, max: 5 }), 500),
-            performer_name: generateTrimmedText(45, true),
+            performer_name: generateTrimmedText(faker.lorem.sentence(), 45),
             date: new Date().getTime(),
             duration: randomIntFromInterval(1, 4),
             price: faker.commerce.price({ min: 100, max: 200, dec: 2 }),
