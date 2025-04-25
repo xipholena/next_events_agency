@@ -9,11 +9,11 @@ module.exports = {
         }
 
         const generateTrimmedText = (text, maxSymbols) => {
-            return text.length > maxSymbols ? text?.slice(maxSymbols) : text
+            return text.length > maxSymbols ? text?.slice(maxSymbols - 1) : text
         }
         const statuses = ['draft', 'open', 'sold_out', 'finished']
 
-        const events = [...Array(2500).keys()].map((event_index) => ({
+        const events = [...Array(1000).keys()].map((event_index) => ({
             id: event_index + 1,
             banner_url: faker.image.url({ width: 480, height: 640 }),
             event_name: generateTrimmedText(faker.lorem.sentence(), 45),

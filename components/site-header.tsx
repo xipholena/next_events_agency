@@ -47,7 +47,7 @@ const SiteHeader = () => {
                 <div className="hidden xl:block">
                     <SearchBar isinHeader />
                 </div>
-                <div className="sm:flex">
+                <div className="sm:flex sm:gap-4">
                     <ul className=" pt-2 pb-5 border-b border-gray-800  text-white whitespace-nowrap sm:flex sm:items-center sm:gap-4 sm:border-b-0 sm:py-0 sm:text-sm sm:justify-between xl:text-gray-900">
                         <li className="block py-1 rounded font-semibold custom-outline hover:text-gray-300 xl:hover:text-gray-600 ">
                             <Link href="">List your property</Link>

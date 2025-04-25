@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-import useEntities from "./hooks/use-entities"
+import useSWREntities from "./hooks/use-entities"
 
 
 const DisplayEntities = ({name}: {name:string}) => {
     const [isFetching, setIsFetching] = useState(false)
     const [entities, setEntities] = useState(null)
-     const {data, error, isLoading} = useEntities({name, isFetching, setIsFetching})
+     const {data, error, isLoading} = useSWREntities({name, isFetching, setIsFetching})
      
      useEffect(() => {
         if(!isLoading) {

@@ -12,6 +12,15 @@ const nextConfig = {
       },
     ],
   },
+  webpack(config) {
+    if (Array.isArray(config?.externals)) {
+      config.externals.push("mysql2");
+    } else {
+      config.externals = ["mysql2"];
+    }
+    return config;
+  },
+
 }
 
 module.exports = nextConfig

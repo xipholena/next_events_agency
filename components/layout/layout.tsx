@@ -26,7 +26,7 @@ export default function Layout({
             </Head>
             <div className=" bg-gray-200 antialiased xl:h-screen">
                 <SiteHeader />
-                <div className="xl:flex xl:h-full">
+                <div className="xl:flex xl:h-full overflow-x-auto">
                     <SearchFilter />
                     <main className="py-6">{children}</main>
                 </div>

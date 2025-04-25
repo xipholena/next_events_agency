@@ -12,8 +12,11 @@ const Users = ({}) => {
 
 export async function getStaticProps() {
     const users = await User.findAll()
-    console.log(users)
+    
     return { props: {  } }
   }
 
 export default Users
+
+
+

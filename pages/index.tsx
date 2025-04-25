@@ -2,7 +2,7 @@ import Layout from '@/components/layout/layout'
 import Card from '@/components/card'
 import useSWR from 'swr'
 import { fetcher } from '@/utils'
-import DisplayEntities from '@/components/display-entities'
+import DisplayEntities from '@/components/display-swr-entities'
 
 export default function Home() {
 

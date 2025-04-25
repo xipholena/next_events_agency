@@ -14,7 +14,7 @@ module.exports = {
             return text.length > maxSymbols ? text?.slice(maxSymbols) : text
         }
         const statuses = ['pending', 'approved']
-        const reviews = [...Array(2500).keys()].map((reviews_index) => ({
+        const reviews = [...Array(3500).keys()].map((reviews_index) => ({
             id: reviews_index + 1,
             rating: randomIntFromInterval(0, 5),
             text: generateTrimmedText(faker.lorem.paragraph({ min: 1, max: 5 }), 500),

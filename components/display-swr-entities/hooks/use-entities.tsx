@@ -6,7 +6,7 @@ type Props = {
     isFetching: boolean, 
     setIsFetching: (boolean) => void;
 }
-const useEntities = ({name, isFetching, setIsFetching}: Props) => {
+const useSWREntities = ({name, isFetching, setIsFetching}: Props) => {
     const { data, error, isLoading } = useSWR(isFetching ? `/api/${name}/`: null, fetcher)
     
     return {
@@ -14,6 +14,6 @@ const useEntities = ({name, isFetching, setIsFetching}: Props) => {
     }
 }
 
-export default useEntities
+export default useSWREntities
 
 

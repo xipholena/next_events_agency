@@ -1,4 +1,4 @@
-import DisplayEntities from "@/components/display-entities"
+import DisplayEntities from "@/components/display-swr-entities"
 
 const EntitiesPage = () => {
     return (
