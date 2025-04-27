@@ -11,6 +11,8 @@ export class EventsController {
     }
 
     async getEventById(req, res) {
+        console.log('===================req', req?.query?.id)
+        console.log('===================req', req?.params)
         const event = await Event.findByPk(1);
         res.json({ event });
     }
