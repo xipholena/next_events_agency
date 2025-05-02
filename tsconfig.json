@@ -29,7 +29,8 @@
     "**/*.tsx",
     "server/models/event.ts",
     "server/models/eventtag.ts",
-    "db/seeders/20250418143004-Events.js"
+    "db/seeders/20250418143004-Events.js",
+    "config.js"
   ],
   "exclude": [
     "node_modules"

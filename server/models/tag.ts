@@ -1,54 +1,54 @@
 'use strict';
-import { sequelize } from "@/db/config";
-import { TagType } from "@/enums";
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { TagEnum } from "@/enums";
+import { BuildOptions, DataTypes, Model, Sequelize } from "sequelize";
+import IContextContainer from "../di/interfaces/IContextContainer";
 
-class Tag extends Model {
-  declare id: number;
-  declare type: TagType;
-  declare tag_name: string;
-  /**
-   * Helper method for defining associations.
-   * This method is not a part of Sequelize lifecycle.
-   * The `models/index` file will call this method automatically.
-   */
-  static associate(models) {
-    // define association here
-  }
+export interface ITag extends Model {
+  id: number;
+
+  type: TagEnum;
+  tagName: string;
+
+  createdAt: Date;
+  updatedAt: Date;
 }
-Tag.init({
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false,
-  },
-  type: {
-    type: DataTypes.ENUM,
-    values: ['event_type', 'genre', 'age', 'duration', 'city'],
-    allowNull: false,
-  },
-  tag_name: {
-    type: DataTypes.STRING(45),
-    allowNull: false,
-    unique: true,
-  },
 
-  createdAt: {
-    field: "created_at",
-    allowNull: false,
-    type: DataTypes.DATE,
-  },
+export type TagType = typeof Model & {
+  new(values?: object, options?: BuildOptions): ITag;
+};
 
-  updatedAt: {
-    field: "updated_at",
-    allowNull: false,
-    type: DataTypes.DATE,
-  },
+export default (ctx: IContextContainer) => {
+  const Tag = <TagType>ctx.db.define("tags", {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    type: {
+      type: DataTypes.ENUM,
+      values: ['event_type', 'genre', 'age', 'duration', 'city'],
+      allowNull: false,
+    },
+    tagName: {
+      field: "tag_name",
+      type: DataTypes.STRING(45),
+      allowNull: false,
+      unique: true,
+    },
 
-}, {
-  sequelize,
-  modelName: 'tag',
-});
+    createdAt: {
+      field: "created_at",
+      allowNull: false,
+      type: DataTypes.DATE,
+    },
 
-export default Tag
+    updatedAt: {
+      field: "updated_at",
+      allowNull: false,
+      type: DataTypes.DATE,
+    },
+  })
+
+  return Tag
+}

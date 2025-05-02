@@ -10,8 +10,8 @@ module.exports = {
         }
         const events_tags = [...Array(2500).keys()].map((event_tag_index) => ({
             id: event_tag_index + 1,
-            event_id: randomIntFromInterval(0, 2500),
-            tag_id: randomIntFromInterval(0, 2500),
+            event_id: randomIntFromInterval(1, 2500),
+            tag_id: randomIntFromInterval(1, 2500),
 
             created_at: new Date(),
             updated_at: new Date()

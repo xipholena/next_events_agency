@@ -14,14 +14,14 @@ module.exports = {
             return text.length > maxSymbols ? text?.slice(maxSymbols) : text
         }
         const statuses = ['pending', 'approved']
-        const reviews = [...Array(3500).keys()].map((reviews_index) => ({
+        const reviews = [...Array(10).keys()].map((reviews_index) => ({
             id: reviews_index + 1,
             rating: randomIntFromInterval(0, 5),
             text: generateTrimmedText(faker.lorem.paragraph({ min: 1, max: 5 }), 500),
             date: new Date().getTime(),
             status: statuses[randomIntFromInterval(0, statuses.length - 1)],
-            event_id: randomIntFromInterval(0, 2500),
-            user_id: randomIntFromInterval(0, 2500),
+            event_id: randomIntFromInterval(1, 10),
+            user_id: randomIntFromInterval(1, 10),
 
             created_at: new Date(),
             updated_at: new Date()

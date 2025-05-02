@@ -6,7 +6,7 @@ export enum TicketStatus {
   REFUND = 'refund'
 }
 
-export enum TagType {
+export enum TagEnum {
   EVENT_TYPE = 'event_type',
   GENRE = 'genre',
   AGE = 'age',
