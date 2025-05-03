@@ -9,51 +9,76 @@ export class BaseController extends BaseContext {
     }
 
     public handleRequest(req, res) {
+        // Add id into object, check it's defined
+        
+        //const { params, isNextPage } = req.contextMetadata || {};
         const { id, isNextPage } = req.contextMetadata || {};
-        console.log('isNextPage', isNextPage)
-        if (isNextPage || id) {
-            switch (req?.method) {
-                case 'GET':
-                    if (id) {
 
-                        return this.di.UsersService.handleSSRFindUser(id).then(user => {
+        //params is {} , so params.values.length instead of id to check if there any string parameter, not just id. OR (+++++)Add isNextPage on every page
+        if (isNextPage || id) { // || id won't be needed
+            //switch (req?.method) {
+             //   case 'GET':
+
+             // params.keys.length - probably will be always 1
+                    if (id) { //params.values[0]
+                        //Extract Users from UsecController and add['entity'Service]
+                        //rename ticketController to ticketS and userService to userS. Check all is plural in di
+                        return this.di.UsersService.handleSSRFindUser(id/* params.values[0]*/).then(user => {
                             const serializableUser = JSON.parse(JSON.stringify(user) ?? '')
-
-                            return createResponse(serializableUser, 'user').getSSP.success
+                            return res.json({ props: { user: serializableUser } })
+                            
                         }).catch(e => {
-                            return createResponse().getSSP.error
+                            return res.status(404).json({ props: { notFound: true } })
+                            
                         });
                     } else {
                         return this.di.UsersService.handleSSRFindAllUsers().then(users => {
                             const serializableUsers = JSON.parse(JSON.stringify(users) ?? '')
-
-                            return createResponse(serializableUsers, 'users').getSSP.success
+                            return res.json({ props: { users: serializableUsers } })
+                           
                         }).catch(e => {
-                            return createResponse().getSSP.error
+                            return res.status(404).json({ props: { notFound: true } })
+                            
                         })
                     }
 
 
-                default:
-                    console.log('------------controller default')
-                    return { props: {} }
-            }
+                //default:
+                //    console.log('------------controller default')
+                //    return { props: {} }
+            //}
         } else {
             switch (req?.method) {
                 case 'GET':
                     if (req?.query?.id) {
                         return this.di.UsersService.findUserById(req?.query?.id).then(user => {
-                            return res.json(createResponse(user, 'user').nextApi.success)
+                            return res.json({
+                                data: user,
+                                message: '',
+                                error: false,
+                              })
                         }).catch(e => {
-                            return res.status(404).json(createResponse().nextApi.error)
+                            return res.status(404).json({
+                                error: true,
+                                message: 'User was not found!',
+                                data: null,
+                              })
                         });
 
                     } else {
 
                         return this.di.UsersService.findAllUsers().then(users => {
-                            return res.json(createResponse(users, 'users').nextApi.success)
+                            return res.json({
+                                data: users,
+                                message: '',
+                                error: false,
+                              })
                         }).catch(e => {
-                            return res.status(404).json(createResponse().nextApi.error)
+                            return res.status(404).json({
+                                error: true,
+                                message: 'User was not found!',
+                                data: null,
+                              })
                         });
                     }
 
