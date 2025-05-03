@@ -2,7 +2,7 @@ import { createResponse } from "@/src/utils";
 import BaseContext from "../di/baseContext";
 import { IUser } from "../models/user";
 
-export class BaseController extends BaseContext {
+export abstract class BaseController extends BaseContext {
     constructor(opts) {
         super(opts)
         this.handleRequest = this.handleRequest.bind(this)
@@ -21,19 +21,24 @@ export class BaseController extends BaseContext {
 
              // params.keys.length - probably will be always 1
                     if (id) { //params.values[0]
-                        //Extract Users from UsecController and add['entity'Service]
+
+                        /**    ====  Part2, not necessary =====  */
+                        //Send User not UsersController, Extract Users from UsecController and add['entity'Service]
+                        //rename all services to handleFindOne and handleFindAll
                         //rename ticketController to ticketS and userService to userS. Check all is plural in di
-                        return this.di.UsersService.handleSSRFindUser(id/* params.values[0]*/).then(user => {
-                            const serializableUser = JSON.parse(JSON.stringify(user) ?? '')
+                        
+                        return this.di.UsersService.handleSSRFindUser(id/* params.values[0]*/).then(response => {
+                            //Serializible what, props what  ====  Part2, not necessary =====
+                            const serializableUser = JSON.parse(JSON.stringify(response) ?? '')
                             return res.json({ props: { user: serializableUser } })
                             
                         }).catch(e => {
                             return res.status(404).json({ props: { notFound: true } })
                             
                         });
-                    } else {
-                        return this.di.UsersService.handleSSRFindAllUsers().then(users => {
-                            const serializableUsers = JSON.parse(JSON.stringify(users) ?? '')
+                    } else { //handleFindOne and handleFindAll
+                        return this.di.UsersService.handleSSRFindAllUsers().then(response => {
+                            const serializableUsers = JSON.parse(JSON.stringify(response) ?? '')
                             return res.json({ props: { users: serializableUsers } })
                            
                         }).catch(e => {
@@ -50,10 +55,12 @@ export class BaseController extends BaseContext {
         } else {
             switch (req?.method) {
                 case 'GET':
+                    //check req.query values.length
                     if (req?.query?.id) {
-                        return this.di.UsersService.findUserById(req?.query?.id).then(user => {
+                        //same Part2
+                        return this.di.UsersService.findUserById(req?.query?.id/*  .values[0] */).then(response => {
                             return res.json({
-                                data: user,
+                                data: response,
                                 message: '',
                                 error: false,
                               })
@@ -67,9 +74,9 @@ export class BaseController extends BaseContext {
 
                     } else {
 
-                        return this.di.UsersService.findAllUsers().then(users => {
+                        return this.di.UsersService.findAllUsers().then(response => {
                             return res.json({
-                                data: users,
+                                data: response,
                                 message: '',
                                 error: false,
                               })
@@ -85,7 +92,7 @@ export class BaseController extends BaseContext {
 
                 default:
                     console.log('------------controller default')
-                    return { props: {} }
+                    return {}//{ props: {} }
             }
         }
 
@@ -104,3 +111,4 @@ export class BaseController extends BaseContext {
 --- /api/users  -> contextId -          --- /api/users  -> isSSP - 
 ---- /api/users/1 -> contextId -        --- /api/users/1  -> isSSP - 
 */
+
